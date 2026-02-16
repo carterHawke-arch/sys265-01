@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # iPerf3 Server
+  iperf-server:
+    image: networkstatic/iperf3:latest
+    container_name: iperf3-server
+    restart: unless-stopped
+    command: -s
+    ports:
+      - "5201:5201"
+    networks:
+      - iperf-network
+
+  # iPerf3 Client
+  iperf-client:
+    image: networkstatic/iperf3:latest
+    container_name: iperf3-client
+    restart: "no"
+    depends_on:
+      - iperf-server
+    networks:
+      - iperf-network
+    entrypoint: ["/bin/sh", "-c", "tail -f /dev/null"]
+
+networks:
+  iperf-network:
+    driver: bridge
