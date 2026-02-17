@@ -8,8 +8,7 @@ username=$1
 sudo useradd -m -d /home/$username -s /bin/bash $username
 sudo mkdir -p /home/$username/.ssh
 sudo chmod 700 /home/$username/.ssh
-cd /home/carter/sys265-01
-sudo cp sys265-01/linux/public-keys/id_rsa.pub /home/$username/.ssh/authorized_keys
+sudo cp ../public-keys/id_rsa.pub /home/$username/.ssh/authorized_keys
 sudo chmod 600 /home/$username/.ssh/authorized_keys
 sudo chown -R $username:$username /home/$username/.ssh
 
